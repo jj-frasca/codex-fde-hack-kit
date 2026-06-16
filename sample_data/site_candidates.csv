@@ -1,0 +1,6 @@
+site_id,name,city,state,lat,lng,roof_area_sqft,power_kw,zoning_status,landlord_status,community_risk,estimated_monthly_cost,notes
+S001,Example Care Hub A,Metro Alpha,ST,0.101,0.101,42000,600,permitted,warm,low,18500,Strong rooftop access and operator proximity
+S002,Example Logistics Annex B,Metro Bravo,ST,0.202,0.202,88000,900,needs_variance,new,medium,22000,Good coverage but zoning review required
+S003,Example Retail Roof C,Metro Charlie,ST,0.303,0.303,31000,350,permitted,cold,high,14000,Nearby community group has prior concerns
+S004,Example Warehouse Roof D,Metro Delta,ST,0.404,0.404,76000,800,unknown,warm,medium,26000,Missing current structural report
+S005,Example Clinic Roof E,Metro Echo,ST,0.505,0.505,39000,500,permitted,warm,low,16500,Strong utility access and local operating partner
