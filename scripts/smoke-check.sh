@@ -20,6 +20,7 @@ required=(
   "scripts/codex-agent-board-review.sh"
   "scripts/pre-push-check.sh"
   "scripts/hackathon-bootstrap.sh"
+  "scripts/install-session-handoff.sh"
   "scripts/public-safety-scan.sh"
   "scripts/codex-retro.sh"
   "sample_data/site_candidates.csv"

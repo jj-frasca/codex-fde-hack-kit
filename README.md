@@ -18,6 +18,14 @@ inspect -> ask problem-owner questions -> smallest useful slice -> plan -> imple
 
 This copies `AGENTS.global.md` to `~/.codex/AGENTS.md`.
 
+## Install Session Handoff
+
+```bash
+./scripts/install-session-handoff.sh /Users/joefrasca/claude-work/CODEX_SESSION_HANDOFF.md
+```
+
+This installs global handoff instructions plus lightweight `SessionStart` and `Stop` hooks. If Codex asks you to trust the hooks in a new session, run `/hooks` and approve them after reviewing the commands.
+
 ## Install Into A Target Repo
 
 From this repo:
