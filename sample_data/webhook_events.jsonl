@@ -1,4 +1,0 @@
-{"event_id":"E001","type":"task.blocked","launch":"Launch Alpha","owner":"Sam","summary":"Community briefing venue not confirmed","severity":"high"}
-{"event_id":"E002","type":"doc.uploaded","launch":"Launch Alpha","owner":"Lee","summary":"Structural review uploaded","severity":"low"}
-{"event_id":"E003","type":"deadline.at_risk","launch":"Launch Bravo","owner":"Nia","summary":"Variance pre-application call due in 48 hours","severity":"medium"}
-{"event_id":"E004","type":"partner.update","launch":"Launch Echo","owner":"Ari","summary":"Clinic partner requested revised site plan","severity":"medium"}

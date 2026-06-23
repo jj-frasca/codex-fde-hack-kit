@@ -1,6 +1,0 @@
-task_id,launch,workstream,task,owner,status,due_date,blocker,evidence_url
-T001,Launch Alpha,Regulatory,Submit zoning confirmation,Ari,in_progress,2026-07-01,false,https://example.invalid/zoning
-T002,Launch Alpha,Community,Schedule neighborhood briefing,Sam,not_started,2026-06-25,true,
-T003,Launch Alpha,Facilities,Complete rooftop structural review,Lee,done,2026-06-10,false,https://example.invalid/structural
-T004,Launch Bravo,Regulatory,Variance pre-application call,Nia,in_progress,2026-06-20,true,
-T005,Launch Bravo,Operations,Draft launch staffing plan,Mo,not_started,2026-07-05,false,

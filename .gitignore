@@ -16,6 +16,9 @@ credentials.*
 *_secrets*
 *.log
 tmp/
+.codex-private/
+.private/
+private-notes/
 dist/
 build/
 node_modules/

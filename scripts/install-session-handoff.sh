@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-HANDOFF_PATH="${1:-/Users/joefrasca/claude-work/CODEX_SESSION_HANDOFF.md}"
+HANDOFF_PATH="${1:-${CODEX_HANDOFF_PATH:-$PWD/CODEX_SESSION_HANDOFF.md}}"
 CODEX_HOME_DIR="${CODEX_HOME:-$HOME/.codex}"
 HOOK_DIR="$CODEX_HOME_DIR/hooks"
 AGENTS_PATH="$CODEX_HOME_DIR/AGENTS.md"
@@ -36,7 +36,7 @@ cat > "$HOOK_DIR/session_handoff.sh" <<'EOF_HOOK'
 #!/usr/bin/env bash
 set -euo pipefail
 
-HANDOFF_PATH="${CODEX_HANDOFF_PATH:-/Users/joefrasca/claude-work/CODEX_SESSION_HANDOFF.md}"
+HANDOFF_PATH="${CODEX_HANDOFF_PATH:-$HOME/CODEX_SESSION_HANDOFF.md}"
 EVENT="${1:-touch}"
 NOW="$(date '+%A, %B %d, %Y %H:%M:%S %Z')"
 

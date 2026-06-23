@@ -17,6 +17,29 @@ git clone https://github.com/<your-github-user>/codex-fde-hack-kit.git
 
 ## Bootstrap A Challenge Repo
 
+For a portable user-level setup that does not modify the challenge repo, run:
+
+```bash
+~/codex-fde-hack-kit/scripts/install-event-harness.sh
+```
+
+Then start Codex from the challenge repo:
+
+```bash
+cd /path/to/challenge-repo
+codex --profile onsite-safe
+```
+
+Use the deep-dive skill first:
+
+```text
+Use $repo-deep-dive with a specialist board. Inspect this repo deeply, explain the architecture, find flaws, and recommend the best one-day hackathon slice.
+```
+
+If skill discovery is stale, restart Codex or reference `~/.codex/skills/repo-deep-dive/SKILL.md` directly in the prompt.
+
+If you also want to install project instructions into the repo:
+
 ```bash
 cd /path/to/challenge-repo
 ~/codex-fde-hack-kit/scripts/hackathon-bootstrap.sh .
@@ -28,10 +51,22 @@ If the challenge repo already has `AGENTS.md`, the installer will not overwrite 
 
 ```bash
 cd /path/to/challenge-repo
-codex
+codex --profile onsite-safe
 ```
 
 ## First Prompts
+
+```text
+Use docs/board_driven_execution.md as the operating model. Run a discovery board first, then an architecture/slice board, and keep one main integrator for code edits.
+```
+
+```text
+Capture the problem show using prompts/02a_problem_show_capture.md. Extract owner, workflow, pain, trusted inputs, useful output, constraints, risk, smallest useful artifact, validation, demo path, and open questions.
+```
+
+```text
+Create a paired execution plan using prompts/03a_paired_execution_plan.md. Split ownership clearly and keep one coherent artifact.
+```
 
 ```text
 Inspect this repo, explain the architecture, identify commands, and do not edit yet.
@@ -45,6 +80,10 @@ Prepare problem-owner questions before we choose what to build.
 Frame the smallest useful vertical slice with non-goals, validation, and demo plan.
 ```
 
+```text
+Choose the best artifact type using prompts/04a_artifact_selector.md. Optimize for usefulness by demo time.
+```
+
 ## Fast Script Loop
 
 ```bash
@@ -54,19 +93,22 @@ Frame the smallest useful vertical slice with non-goals, validation, and demo pl
 ~/codex-fde-hack-kit/scripts/codex-implement.sh
 ~/codex-fde-hack-kit/scripts/codex-review.sh
 ~/codex-fde-hack-kit/scripts/codex-demo.sh
-~/codex-fde-hack-kit/scripts/codex-retro.sh "Capture one lesson, one non-promotion, and one next adjustment"
 ```
 
-## 90 Minute Onsite Loop
+## Onsite Loop
 
 ```text
-00-10: inspect repo, commands, data, existing instructions
-10-20: ask problem-owner questions and define operator pain
-20-30: choose smallest useful slice, non-goals, and demo signal
-30-65: implement the slice, stopping scope expansion aggressively
-65-75: run tests/checks and fix only must-fix failures
-75-85: prepare demo note: pain, input, tool, output, trust, next
-85-90: run a 3-minute retrospective and capture one next adjustment
+Arrive: follow event rules, be present, and observe operational context
+Setup: read instructions, inspect repo shape, confirm commands
+Problem show: capture owner, workflow, pain, constraints, desired outcome
+First owner check-in: ask what is useful by demo time and what not to build
+Pair alignment: split ownership, set sync checkpoints, keep one artifact
+Board check: run discovery and architecture/slice roles before coding
+Build block: implement smallest useful artifact, integrate early
+Pressure tests: show intermediate output to owner and adapt scope
+Verification: run focused checks and validate usefulness
+Demo prep: run pre-demo board, then rehearse pain, input, artifact, output, trust, limits, next
+Project recap: contribution, Codex usage, tradeoffs, production path
 ```
 
 ## Before Push Or Demo

@@ -16,10 +16,7 @@ if ! command -v codex >/dev/null 2>&1; then
 fi
 
 cd "$TARGET"
-codex "$(cat "$PROMPT")
-
-Agent team board:
-$ROOT/agent_team_board.md
+codex exec --ephemeral --sandbox read-only -c approval_policy=\"never\" -c model_reasoning_effort=\"medium\" "$(cat "$PROMPT")
 
 Target:
 $TARGET"

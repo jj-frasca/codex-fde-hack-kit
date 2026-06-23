@@ -1,11 +1,15 @@
-Review the current branch like a senior engineer.
+Run a specialist board review of the current branch.
 
-Prioritize:
+Use subagents only if I explicitly ask for parallel agents. Otherwise simulate these roles sequentially:
 
-- bugs
-- regressions
-- missing validation
-- confusing UX or workflow gaps
-- unsafe assumptions
+- Architecture Mapper
+- Product/Demo Reviewer
+- Reliability Reviewer
+- Security/Privacy Reviewer
+- DX/Setup Reviewer
+- Maintainability Reviewer
+- Red Team
 
-Return findings first, ordered by severity, with file and line references when possible.
+Prioritize bugs, regressions, missing validation, confusing workflow gaps, unsafe assumptions, architecture tradeoffs, and demo trust risks.
+
+Return findings first, ordered by severity, with file and line references when possible. Do not modify files.

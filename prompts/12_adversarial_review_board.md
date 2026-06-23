@@ -1,17 +1,21 @@
-Run an adversarial agent-team review before push or demo.
+Run an adversarial agent-team audit before push or demo.
 
-Use the roles from `agent_team_board.md`:
+Use this as a production-readiness board. Every role should make the architecture and workflow more defensible, not merely list preferences.
+
+Use these roles:
 
 - Problem Framer
-- Product/Demo Reviewer
-- Reliability Reviewer
-- Security/Privacy Reviewer
-- Maintainability Reviewer
+- Architecture Mapper
+- Product/Demo
+- Reliability
+- Security/Privacy
+- DX/Setup
+- Maintainability
 - Red Team
 
-If subagents are available, run roles in parallel. If subagents are not available, simulate the board sequentially and clearly label each role.
+Simulate the board sequentially and clearly label each role. Do not spawn subagents unless the user explicitly asks for a parallel review.
 
-Review:
+Inspect:
 
 - current git status and diff
 - README / AGENTS instructions
@@ -19,6 +23,10 @@ Review:
 - public-safety risks
 - demo readiness
 - scope and overbuild risk
+- architecture tradeoffs and simpler alternatives
+- whether one coherent artifact exists
+
+If you are running in a read-only sandbox, do not execute checks that require temp-directory creation or writes. Inspect those scripts, report the environment limitation, and distinguish it from repo blockers. Treat separately supplied writable-shell check output as evidence when present.
 
 Cap output to blockers plus at most one high-signal finding per role. For product/demo findings, include why it affects candidate speed or demo clarity.
 
@@ -34,4 +42,4 @@ Fix plan:
 Ready to push/demo: yes / no
 ```
 
-Do not modify files unless explicitly asked. Findings should be concrete and tied to files, commands, or observable behavior.
+Do not modify files. Findings should be concrete and tied to files, commands, or observable behavior.

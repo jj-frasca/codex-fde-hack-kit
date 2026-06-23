@@ -1,0 +1,4 @@
+interface:
+  display_name: "Repo Deep Dive"
+  short_description: "Inspect a repo for hackathon slices"
+  default_prompt: "Use $repo-deep-dive to inspect this repo deeply, explain the architecture, find flaws, and recommend the best one-day hackathon slice."

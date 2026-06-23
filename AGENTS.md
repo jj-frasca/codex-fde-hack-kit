@@ -39,7 +39,9 @@ Demo angle:
 
 - Prefer the smallest useful vertical slice.
 - Keep diffs minimal and reversible.
-- Add validation through tests, smoke commands, sample data, or manual checklists.
+- Use specialist boards for non-trivial problem framing, architecture, review, and demo decisions.
+- Keep one main integrator responsible for code edits; use subagents for bounded read-heavy work and review.
+- Add validation through tests, smoke commands, fixtures, or manual checklists.
 - Avoid broad rewrites and new dependencies unless clearly justified.
 - Summarize commands run and residual risk.
 - Never commit API keys, tokens, private contact details, or proprietary/private company information.

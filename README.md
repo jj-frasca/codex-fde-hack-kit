@@ -1,14 +1,30 @@
 # Codex FDE Hack Kit
 
-Lightweight Codex-native operating kit for a Forward Deployed GenAI Engineer hackathon. It contains no proprietary company data. It gives you repeatable instructions, prompts, scripts, sample data, and practice scenarios for moving quickly in unfamiliar repos.
+Lightweight Codex-native operating kit for a Forward Deployed GenAI Engineer hackathon. It contains no proprietary company data. It gives you portable instructions, prompts, skills, and scripts for moving quickly in an unfamiliar challenge repo.
 
 This differs from `claude-setup`: that repo can inspire structure, but this kit is built around Codex repo instructions (`AGENTS.md`), Codex-facing prompt wrappers, and git worktrees.
 
 Core loop:
 
 ```text
-inspect -> ask problem-owner questions -> smallest useful slice -> plan -> implement -> verify -> demo -> summarize diff -> retrospective -> improve harness
+problem show -> owner questions -> artifact choice -> paired plan -> smallest useful slice -> implement -> pressure-test -> verify -> demo -> project recap
 ```
+
+Operating thesis:
+
+```text
+Use Codex as an execution system, not just a prompt box.
+```
+
+Use Codex as an execution system with preserved context, explicit goals, bounded delegation, visible guardrails, and tight verification loops. Optimize the final artifact for client trust and non-coder usefulness.
+
+Board-first rule:
+
+```text
+Use specialist boards for problem framing, architecture/slice decisions, implementation review, and pre-demo trust checks. Keep one main integrator responsible for code edits.
+```
+
+See `docs/board_driven_execution.md`.
 
 ## Install Global Instructions
 
@@ -21,7 +37,7 @@ This copies `AGENTS.global.md` to `~/.codex/AGENTS.md`.
 ## Install Session Handoff
 
 ```bash
-./scripts/install-session-handoff.sh /Users/joefrasca/claude-work/CODEX_SESSION_HANDOFF.md
+./scripts/install-session-handoff.sh "$HOME/CODEX_SESSION_HANDOFF.md"
 ```
 
 This installs global handoff instructions plus lightweight `SessionStart` and `Stop` hooks. If Codex asks you to trust the hooks in a new session, run `/hooks` and approve them after reviewing the commands.
@@ -36,23 +52,47 @@ From this repo:
 
 If the target repo already has `AGENTS.md`, read it first and merge carefully. The target repo's instructions should take priority.
 
-## Worktree Isolation
+## Install Event Harness
 
-Use a git worktree so Codex does not interfere with another agent or editor session.
-
-```bash
-./scripts/create-worktree.sh /path/to/source-repo practice/scenario ../practice-worktree
-cd ../practice-worktree
-codex
-```
-
-Remove later:
+Use this on a clean event machine after cloning the kit. It installs the portable `repo-deep-dive` skill to `~/.agents/skills` and `~/.codex/skills`, installs read-only custom agent roles to `~/.codex/agents`, and creates an `onsite-safe` Codex profile if one does not exist.
 
 ```bash
-./scripts/remove-worktree.sh ../practice-worktree
+~/codex-fde-hack-kit/scripts/install-event-harness.sh
 ```
 
-## Practice Loop Commands
+Then, from a challenge repo:
+
+```bash
+codex --profile onsite-safe
+```
+
+Prompt:
+
+```text
+Use $repo-deep-dive with a specialist board. Inspect this repo deeply, explain the architecture, find flaws, and recommend the best one-day hackathon slice.
+```
+
+If Codex does not discover the new skill until restart, reference `~/.codex/skills/repo-deep-dive/SKILL.md` directly in the prompt or use the wrapper below.
+
+Fast wrapper:
+
+```bash
+~/codex-fde-hack-kit/scripts/codex-deep-dive.sh /path/to/challenge-repo
+```
+
+## Private Context
+
+Do not put event-specific private context in this public repo. Use an ignored local file instead:
+
+```bash
+~/codex-fde-hack-kit/scripts/init-private-context.sh /path/to/challenge-repo
+```
+
+Then tell Codex to read `.codex-private/hackathon_context.md` as private context and not copy it into repo files, commits, logs, public docs, or demo artifacts.
+
+See `docs/private_context_workflow.md`.
+
+## Day-Of Command Loop
 
 Run these from the target repo you want Codex to work on:
 
@@ -64,7 +104,6 @@ Run these from the target repo you want Codex to work on:
 /path/to/codex-fde-hack-kit/scripts/codex-debug.sh "Fix the failing smoke check"
 /path/to/codex-fde-hack-kit/scripts/codex-review.sh
 /path/to/codex-fde-hack-kit/scripts/codex-demo.sh
-/path/to/codex-fde-hack-kit/scripts/codex-retro.sh "Review the practice rep"
 ```
 
 ## Pre-Push Adversarial Review
@@ -76,32 +115,17 @@ Before pushing or demoing, run automated checks and then the agent board:
 /path/to/codex-fde-hack-kit/scripts/codex-agent-board-review.sh /path/to/target-repo
 ```
 
-The board uses focused roles: problem framing, product/demo, reliability, security/privacy, maintainability, and red team. Fix blockers first. Do not promote new durable instructions unless the retrospective evidence justifies it.
-
-## Retrospective Loop
-
-After each practice rep, write one concise retrospective:
-
-```bash
-/path/to/codex-fde-hack-kit/scripts/codex-retro.sh
-```
-
-Only promote durable lessons after repeated evidence:
-
-```bash
-/path/to/codex-fde-hack-kit/scripts/codex-promote-rule.sh
-```
-
-Do not promote one-off scenario details, vague preferences, duplicate rules, or instructions that conflict with a target repo's `AGENTS.md`.
+The board uses focused roles: problem framing, architecture, product/demo, reliability, security/privacy, DX/setup, maintainability, and red team. Fix blockers first.
 
 ## Hackathon Use
 
 1. Clone this repo.
 2. Clone or open the challenge repo.
-3. Install project instructions into the challenge repo.
-4. Ask Codex to inspect before editing.
-5. Choose one useful vertical slice.
-6. Implement, verify, summarize the diff, and iterate.
+3. Install the event harness.
+4. Start Codex with `codex --profile onsite-safe`.
+5. Use `$repo-deep-dive` before editing.
+6. Choose one useful vertical slice.
+7. Implement, verify, summarize the diff, and iterate.
 
 Fast bootstrap:
 
@@ -115,5 +139,6 @@ See `hackathon_quickstart.md` for the clean-machine flow.
 
 - Do not commit proprietary company data, code, screenshots, or private challenge materials.
 - Do not run Codex in a workspace another tool or teammate is actively editing. Use a worktree.
+- Use subagents for bounded read-heavy work and reviews; keep one integrator for implementation.
 - Prefer deterministic rules and auditable workflows before LLM-based automation.
 - Treat people, community, and regulatory outputs as decision support, not final authority.

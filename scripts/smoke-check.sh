@@ -6,14 +6,26 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 required=(
   "README.md"
   "hackathon_quickstart.md"
+  "docs/codex_operating_model.md"
+  "docs/board_driven_execution.md"
+  "docs/client_trust_demo_guide.md"
+  "docs/private_context_workflow.md"
   "AGENTS.md"
   "AGENTS.global.md"
   "agent_team_board.md"
   "prompts/01_repo_triage.md"
+  "prompts/02a_problem_show_capture.md"
   "prompts/02_problem_owner_interview.md"
+  "prompts/03a_paired_execution_plan.md"
+  "prompts/04a_artifact_selector.md"
+  "prompts/09_project_recap_followup.md"
   "prompts/07_demo_prep.md"
   "prompts/12_adversarial_review_board.md"
-  "retrospectives/template.md"
+  "prompts/13_codex_operating_system_review.md"
+  "prompts/14_client_trust_demo.md"
+  "prompts/15_private_context_guard.md"
+  "skills/problem-owner-discovery/SKILL.md"
+  "skills/paired-hackathon-execution/SKILL.md"
   "scripts/install-into-target-repo.sh"
   "scripts/codex-interview-plan.sh"
   "scripts/codex-demo.sh"
@@ -21,9 +33,21 @@ required=(
   "scripts/pre-push-check.sh"
   "scripts/hackathon-bootstrap.sh"
   "scripts/install-session-handoff.sh"
+  "scripts/install-event-harness.sh"
+  "scripts/init-private-context.sh"
+  "scripts/codex-deep-dive.sh"
   "scripts/public-safety-scan.sh"
-  "scripts/codex-retro.sh"
-  "sample_data/site_candidates.csv"
+  ".agents/skills/repo-deep-dive/SKILL.md"
+  ".agents/skills/repo-deep-dive/scripts/repo_inventory.sh"
+  ".agents/skills/repo-deep-dive/references/report_schema.md"
+  ".codex/agents/problem-framer.toml"
+  ".codex/agents/architecture-mapper.toml"
+  ".codex/agents/product-slice-finder.toml"
+  ".codex/agents/reliability-reviewer.toml"
+  ".codex/agents/security-privacy-reviewer.toml"
+  ".codex/agents/dx-setup-reviewer.toml"
+  ".codex/agents/maintainability-reviewer.toml"
+  ".codex/agents/red-team.toml"
 )
 
 for path in "${required[@]}"; do
@@ -33,5 +57,50 @@ for path in "${required[@]}"; do
   fi
 done
 
+if git -C "$ROOT" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  for path in "${required[@]}"; do
+    if ! git -C "$ROOT" ls-files --error-unmatch "$path" >/dev/null 2>&1; then
+      echo "Required file is not staged/tracked by git: $path" >&2
+      exit 1
+    fi
+  done
+fi
+
 bash -n "$ROOT"/scripts/*.sh
+bash -n "$ROOT"/.agents/skills/repo-deep-dive/scripts/*.sh
+
+TMP_HOME="$(mktemp -d)"
+TMP_REPO="$(mktemp -d)"
+cleanup() {
+  rm -rf "$TMP_HOME" "$TMP_REPO"
+}
+trap cleanup EXIT
+
+HOME="$TMP_HOME" CODEX_HOME="$TMP_HOME/.codex" "$ROOT/scripts/install-event-harness.sh" >/dev/null
+
+for path in \
+  "$TMP_HOME/.codex/onsite-safe.config.toml" \
+  "$TMP_HOME/.codex/skills/repo-deep-dive/SKILL.md" \
+  "$TMP_HOME/.agents/skills/repo-deep-dive/SKILL.md" \
+  "$TMP_HOME/.codex/agents/problem-framer.toml" \
+  "$TMP_HOME/.codex/agents/architecture-mapper.toml"; do
+  if [[ ! -f "$path" ]]; then
+    echo "Harness install smoke failed, missing: $path" >&2
+    exit 1
+  fi
+done
+
+git -C "$TMP_REPO" init -q
+"$ROOT/scripts/init-private-context.sh" "$TMP_REPO" >/dev/null
+
+if [[ ! -f "$TMP_REPO/.codex-private/hackathon_context.md" ]]; then
+  echo "Private-context smoke failed: missing .codex-private/hackathon_context.md" >&2
+  exit 1
+fi
+
+if ! grep -qxF ".codex-private/" "$TMP_REPO/.git/info/exclude"; then
+  echo "Private-context smoke failed: .codex-private/ not added to local git exclude" >&2
+  exit 1
+fi
+
 echo "Smoke check passed."
