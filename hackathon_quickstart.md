@@ -65,6 +65,10 @@ Capture the problem show using prompts/02a_problem_show_capture.md. Extract owne
 ```
 
 ```text
+Create the one-page agent/tool spec using prompts/16_agent_spec_document.md. Optimize for usefulness, trust, and demo feasibility.
+```
+
+```text
 Create a paired execution plan using prompts/03a_paired_execution_plan.md. Split ownership clearly and keep one coherent artifact.
 ```
 
@@ -84,6 +88,10 @@ Frame the smallest useful vertical slice with non-goals, validation, and demo pl
 Choose the best artifact type using prompts/04a_artifact_selector.md. Optimize for usefulness by demo time.
 ```
 
+```text
+Prepare a 30-second evaluator update using prompts/18_evaluator_walkup.md.
+```
+
 ## Fast Script Loop
 
 ```bash
@@ -101,6 +109,7 @@ Choose the best artifact type using prompts/04a_artifact_selector.md. Optimize f
 Arrive: follow event rules, be present, and observe operational context
 Setup: read instructions, inspect repo shape, confirm commands
 Problem show: capture owner, workflow, pain, constraints, desired outcome
+Agent spec: write a one-page buildable spec before coding
 First owner check-in: ask what is useful by demo time and what not to build
 Pair alignment: split ownership, set sync checkpoints, keep one artifact
 Board check: run discovery and architecture/slice roles before coding
@@ -110,6 +119,22 @@ Verification: run focused checks and validate usefulness
 Demo prep: run pre-demo board, then rehearse pain, input, artifact, output, trust, limits, next
 Project recap: contribution, Codex usage, tradeoffs, production path
 ```
+
+## Spec Block
+
+The early operating sequence is:
+
+```text
+user discovery -> agent/tool spec -> build
+```
+
+Treat discovery and spec-writing as separate timeboxed blocks when the event schedule allows.
+
+References:
+
+- `docs/day_schedule.md`
+- `docs/agent_spec_template.md`
+- `docs/context_preservation_during_interruption.md`
 
 ## Before Push Or Demo
 

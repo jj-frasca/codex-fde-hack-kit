@@ -54,7 +54,7 @@ If the target repo already has `AGENTS.md`, read it first and merge carefully. T
 
 ## Install Event Harness
 
-Use this on a clean event machine after cloning the kit. It installs the portable `repo-deep-dive` skill to `~/.agents/skills` and `~/.codex/skills`, installs read-only custom agent roles to `~/.codex/agents`, and creates an `onsite-safe` Codex profile if one does not exist.
+Use this on a clean event machine after cloning the kit. It installs the portable `repo-deep-dive` skill to `~/.agents/skills` and `~/.codex/skills`, installs specialist agent role prompts to `~/.codex/agents`, and creates an `onsite-safe` Codex profile if one does not exist.
 
 ```bash
 ~/codex-fde-hack-kit/scripts/install-event-harness.sh
@@ -124,8 +124,9 @@ The board uses focused roles: problem framing, architecture, product/demo, relia
 3. Install the event harness.
 4. Start Codex with `codex --profile onsite-safe`.
 5. Use `$repo-deep-dive` before editing.
-6. Choose one useful vertical slice.
-7. Implement, verify, summarize the diff, and iterate.
+6. Convert discovery notes into a one-page agent/tool spec.
+7. Choose one useful vertical slice.
+8. Implement, verify, summarize the diff, and iterate.
 
 Fast bootstrap:
 
@@ -134,6 +135,22 @@ Fast bootstrap:
 ```
 
 See `hackathon_quickstart.md` for the clean-machine flow.
+
+## Spec Block
+
+The critical early window is:
+
+```text
+user discovery -> one-page agent/tool spec -> smallest useful build
+```
+
+Use:
+
+- `docs/day_schedule.md`
+- `docs/agent_spec_template.md`
+- `prompts/16_agent_spec_document.md`
+- `prompts/18_evaluator_walkup.md`
+- `prompts/19_demo_timebox_variants.md`
 
 ## Safety
 

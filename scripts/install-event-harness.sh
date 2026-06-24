@@ -33,7 +33,7 @@ cp -R "$ROOT/.agents/skills/repo-deep-dive" "$CODEX_HOME/skills/repo-deep-dive"
 echo "Installed repo-deep-dive skill to $CODEX_HOME/skills/repo-deep-dive"
 
 cp "$ROOT/.codex/agents/"*.toml "$CODEX_HOME/agents/"
-echo "Installed custom read-only agents to $CODEX_HOME/agents"
+echo "Installed specialist agent role prompts to $CODEX_HOME/agents"
 
 if [[ ! -f "$CODEX_HOME/onsite-safe.config.toml" ]]; then
   cat >"$CODEX_HOME/onsite-safe.config.toml" <<'TOML'
