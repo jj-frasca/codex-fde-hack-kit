@@ -4,9 +4,11 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 required=(
+  "EVENT_DAY_BUNDLE.md"
   "README.md"
   "hackathon_quickstart.md"
   "docs/day_schedule.md"
+  "docs/day_of_access_strategy.md"
   "docs/agent_spec_template.md"
   "docs/culture_fit_interview_prep.md"
   "docs/evaluator_walkup_answers.md"
@@ -43,6 +45,8 @@ required=(
   "scripts/hackathon-bootstrap.sh"
   "scripts/install-session-handoff.sh"
   "scripts/install-event-harness.sh"
+  "scripts/install-kit-in-target-repo.sh"
+  "scripts/protect-challenge-repo.sh"
   "scripts/init-private-context.sh"
   "scripts/codex-deep-dive.sh"
   "scripts/public-safety-scan.sh"
@@ -109,6 +113,23 @@ fi
 
 if ! grep -qxF ".codex-private/" "$TMP_REPO/.git/info/exclude"; then
   echo "Private-context smoke failed: .codex-private/ not added to local git exclude" >&2
+  exit 1
+fi
+
+"$ROOT/scripts/install-kit-in-target-repo.sh" "$TMP_REPO" >/dev/null
+
+if [[ ! -f "$TMP_REPO/.codex-kit/codex-fde-hack-kit/EVENT_DAY_BUNDLE.md" ]]; then
+  echo "Embedded-kit smoke failed: missing EVENT_DAY_BUNDLE.md" >&2
+  exit 1
+fi
+
+if ! grep -qxF ".codex-kit/" "$TMP_REPO/.git/info/exclude"; then
+  echo "Embedded-kit smoke failed: .codex-kit/ not added to local git exclude" >&2
+  exit 1
+fi
+
+if git -C "$TMP_REPO" ls-files .codex-kit .codex-private .private private-notes EVENT_DAY_BUNDLE.md | grep . >/dev/null; then
+  echo "Embedded-kit smoke failed: protected files are tracked" >&2
   exit 1
 fi
 

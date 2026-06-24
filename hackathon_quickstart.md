@@ -4,15 +4,17 @@ Use this when you get a fresh challenge repo and need the setup active immediate
 
 ## Clone The Kit
 
+Prefer HTTPS because SSH keys may not be available on a clean event machine:
+
 ```bash
 cd ~
-git clone git@github.com:<your-github-user>/codex-fde-hack-kit.git
+git clone https://github.com/<your-github-user>/codex-fde-hack-kit.git
 ```
 
-If SSH is not available:
+If HTTPS is blocked but SSH is configured:
 
 ```bash
-git clone https://github.com/<your-github-user>/codex-fde-hack-kit.git
+git clone git@github.com:<your-github-user>/codex-fde-hack-kit.git
 ```
 
 ## Bootstrap A Challenge Repo
@@ -46,6 +48,32 @@ cd /path/to/challenge-repo
 ```
 
 If the challenge repo already has `AGENTS.md`, the installer will not overwrite it blindly. Read the existing file first and merge only the useful parts underneath the repo's own instructions.
+
+## If The Kit Must Live Inside The Challenge Repo
+
+Use an ignored local embed. This gives you the kit from inside the codebase without staging it:
+
+```bash
+~/codex-fde-hack-kit/scripts/install-kit-in-target-repo.sh /path/to/challenge-repo
+cd /path/to/challenge-repo
+.codex-kit/codex-fde-hack-kit/scripts/protect-challenge-repo.sh .
+```
+
+Then run kit scripts by path:
+
+```bash
+.codex-kit/codex-fde-hack-kit/scripts/codex-deep-dive.sh .
+.codex-kit/codex-fde-hack-kit/scripts/pre-push-check.sh .
+```
+
+Before every commit:
+
+```bash
+git status --short
+git ls-files .codex-kit .codex-private .private private-notes EVENT_DAY_BUNDLE.md
+```
+
+The second command should print nothing.
 
 ## Start Codex
 
@@ -145,7 +173,18 @@ References:
 
 ## If GitHub Access Is Blocked
 
-Bring a local copy on your machine. At minimum, copy:
+Use `EVENT_DAY_BUNDLE.md` or a printed copy. If file transfer is allowed, place the bundle outside the challenge repo or under ignored `.codex-kit/`.
+
+No-install Codex:
+
+```bash
+cd /path/to/challenge-repo
+codex -c 'sandbox_mode="workspace-write"' -c 'approval_policy="on-request"' -c 'model_reasoning_effort="medium"'
+```
+
+Then paste the bundle prompts manually.
+
+At minimum, the bundle contains:
 
 - `AGENTS.global.md` into `~/.codex/AGENTS.md`
 - `AGENTS.md` into the challenge repo only after checking for an existing repo instruction file

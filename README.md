@@ -80,6 +80,25 @@ Fast wrapper:
 ~/codex-fde-hack-kit/scripts/codex-deep-dive.sh /path/to/challenge-repo
 ```
 
+## Access And Fallbacks
+
+Prefer cloning the public kit outside the challenge repo:
+
+```bash
+cd ~
+git clone https://github.com/<your-github-user>/codex-fde-hack-kit.git
+```
+
+If you need the kit physically inside the challenge repo, embed it under ignored `.codex-kit/`:
+
+```bash
+~/codex-fde-hack-kit/scripts/install-kit-in-target-repo.sh /path/to/challenge-repo
+```
+
+This keeps the public kit available from the codebase without committing it. If GitHub or install is blocked, use `EVENT_DAY_BUNDLE.md` and paste prompts manually.
+
+See `docs/day_of_access_strategy.md`.
+
 ## Private Context
 
 Do not put event-specific private context in this public repo. Use an ignored local file instead:
@@ -133,6 +152,8 @@ Fast bootstrap:
 ```bash
 ~/codex-fde-hack-kit/scripts/hackathon-bootstrap.sh /path/to/challenge-repo
 ```
+
+Use bootstrap only when you intentionally want to add repo-level instructions. For event day, prefer `install-event-harness.sh` or the ignored `.codex-kit/` embed path.
 
 See `hackathon_quickstart.md` for the clean-machine flow.
 
