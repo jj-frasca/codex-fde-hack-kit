@@ -5,6 +5,7 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 required=(
   "EVENT_DAY_BUNDLE.md"
+  "DAY_OF.md"
   "README.md"
   "hackathon_quickstart.md"
   "docs/day_schedule.md"
@@ -120,6 +121,11 @@ fi
 
 if [[ ! -f "$TMP_REPO/.codex-kit/codex-fde-hack-kit/EVENT_DAY_BUNDLE.md" ]]; then
   echo "Embedded-kit smoke failed: missing EVENT_DAY_BUNDLE.md" >&2
+  exit 1
+fi
+
+if [[ ! -f "$TMP_REPO/.codex-kit/codex-fde-hack-kit/DAY_OF.md" ]]; then
+  echo "Embedded-kit smoke failed: missing DAY_OF.md" >&2
   exit 1
 fi
 

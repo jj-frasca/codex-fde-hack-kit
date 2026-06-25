@@ -31,6 +31,7 @@ mkdir -p "$DEST"
 items=(
   "AGENTS.md"
   "AGENTS.global.md"
+  "DAY_OF.md"
   "EVENT_DAY_BUNDLE.md"
   "README.md"
   "agent_team_board.md"

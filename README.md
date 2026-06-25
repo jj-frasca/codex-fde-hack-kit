@@ -26,6 +26,16 @@ Use specialist boards for problem framing, architecture/slice decisions, impleme
 
 See `docs/board_driven_execution.md`.
 
+## Day-Of Brief
+
+Use this as the first file for Codex and the human operator:
+
+```bash
+DAY_OF.md
+```
+
+It contains the event-day operating model, discovery capture, one-page spec shape, build loop, review board, demo shape, setup fallbacks, and contamination checks.
+
 ## Install Global Instructions
 
 ```bash
@@ -54,7 +64,7 @@ If the target repo already has `AGENTS.md`, read it first and merge carefully. T
 
 ## Install Event Harness
 
-Use this on a clean event machine after cloning the kit. It installs the portable `repo-deep-dive` skill to `~/.agents/skills` and `~/.codex/skills`, installs specialist agent role prompts to `~/.codex/agents`, and creates an `onsite-safe` Codex profile if one does not exist.
+Use this on a clean event machine after cloning the kit. It installs the portable `repo-deep-dive` skill to `~/.agents/skills` and `~/.codex/skills`, installs specialist agent role prompts to `~/.codex/agents`, and writes an `onsite-safe` Codex profile. If that profile already exists, the script backs it up first.
 
 ```bash
 ~/codex-fde-hack-kit/scripts/install-event-harness.sh
@@ -79,6 +89,8 @@ Fast wrapper:
 ```bash
 ~/codex-fde-hack-kit/scripts/codex-deep-dive.sh /path/to/challenge-repo
 ```
+
+The wrapper enforces a read-only sandbox for the first repository pass.
 
 ## Access And Fallbacks
 

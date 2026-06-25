@@ -16,6 +16,9 @@ fi
 common_args=(
   -n -uu --no-heading
   -g '!**/.git/**' \
+  -g '!**/node_modules/**' \
+  -g '!**/dist/**' \
+  -g '!**/build/**' \
   -g '!**/.venv/**' \
   -g '!**/.pytest_cache/**' \
   -g '!**/__pycache__/**' \

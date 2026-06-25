@@ -16,7 +16,7 @@ if ! command -v codex >/dev/null 2>&1; then
 fi
 
 cd "$TARGET"
-codex exec --ephemeral --sandbox read-only -c approval_policy=\"never\" -c model_reasoning_effort=\"medium\" "$(cat "$PROMPT")
+codex exec --ephemeral --sandbox read-only -c approval_policy=\"never\" -c model_reasoning_effort=\"xhigh\" "$(cat "$PROMPT")
 
 Target:
 $TARGET"

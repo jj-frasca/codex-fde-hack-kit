@@ -35,11 +35,11 @@ echo "Installed repo-deep-dive skill to $CODEX_HOME/skills/repo-deep-dive"
 cp "$ROOT/.codex/agents/"*.toml "$CODEX_HOME/agents/"
 echo "Installed specialist agent role prompts to $CODEX_HOME/agents"
 
-if [[ ! -f "$CODEX_HOME/onsite-safe.config.toml" ]]; then
-  cat >"$CODEX_HOME/onsite-safe.config.toml" <<'TOML'
+backup_if_exists "$CODEX_HOME/onsite-safe.config.toml"
+cat >"$CODEX_HOME/onsite-safe.config.toml" <<'TOML'
 sandbox_mode = "workspace-write"
 approval_policy = "on-request"
-model_reasoning_effort = "medium"
+model_reasoning_effort = "xhigh"
 
 [features]
 hooks = true
@@ -60,10 +60,7 @@ exclude = [
   "OPENAI_API_KEY",
 ]
 TOML
-  echo "Installed onsite-safe Codex profile"
-else
-  echo "onsite-safe profile already exists: $CODEX_HOME/onsite-safe.config.toml"
-fi
+echo "Installed onsite-safe Codex profile"
 
 echo
 echo "Event harness installed."

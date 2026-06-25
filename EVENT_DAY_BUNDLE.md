@@ -38,7 +38,7 @@ Run kit scripts by path:
 
 ```bash
 cd /path/to/challenge-repo
-codex -c 'sandbox_mode="workspace-write"' -c 'approval_policy="on-request"' -c 'model_reasoning_effort="medium"'
+codex -c 'sandbox_mode="workspace-write"' -c 'approval_policy="on-request"' -c 'model_reasoning_effort="xhigh"'
 ```
 
 Paste the prompts below manually.
@@ -146,8 +146,8 @@ Before committing or demoing:
 ```bash
 git status --short
 git diff --check
-git ls-files .codex-kit .codex-private .private private-notes 2>/dev/null
-git diff --cached --name-only | grep -E '(^|/)(\.codex-kit|\.codex-private|\.private|private-notes)(/|$)' || true
+git ls-files .codex-kit .codex-private .private private-notes EVENT_DAY_BUNDLE.md 2>/dev/null
+git diff --cached --name-only | grep -E '(^|/)(\.codex-kit|\.codex-private|\.private|private-notes)(/|$)|(^|/)EVENT_DAY_BUNDLE\.md$' || true
 ```
 
 No kit files, private notes, credentials, or private context should be staged.

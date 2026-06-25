@@ -2,6 +2,8 @@
 
 Use this when you get a fresh challenge repo and need the setup active immediately.
 
+For the full agent/human operating brief, point Codex to `DAY_OF.md` first.
+
 ## Clone The Kit
 
 Prefer HTTPS because SSH keys may not be available on a clean event machine:
@@ -179,7 +181,7 @@ No-install Codex:
 
 ```bash
 cd /path/to/challenge-repo
-codex -c 'sandbox_mode="workspace-write"' -c 'approval_policy="on-request"' -c 'model_reasoning_effort="medium"'
+codex -c 'sandbox_mode="workspace-write"' -c 'approval_policy="on-request"' -c 'model_reasoning_effort="xhigh"'
 ```
 
 Then paste the bundle prompts manually.

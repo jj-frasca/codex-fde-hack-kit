@@ -64,7 +64,7 @@ If `~/.codex`, `~/.agents`, hooks, profiles, or shell scripts are blocked:
 
 ```bash
 cd /path/to/challenge-repo
-codex -c 'sandbox_mode="workspace-write"' -c 'approval_policy="on-request"' -c 'model_reasoning_effort="medium"'
+codex -c 'sandbox_mode="workspace-write"' -c 'approval_policy="on-request"' -c 'model_reasoning_effort="xhigh"'
 ```
 
 Paste prompts from `EVENT_DAY_BUNDLE.md`.
@@ -76,7 +76,7 @@ Use a preloaded or printed copy of `EVENT_DAY_BUNDLE.md`. If event rules allow a
 ## What Never Belongs In The Challenge Commit
 
 - `codex-fde-hack-kit`
-- `fde-ops-lab`
+- private practice repos
 - `.codex-kit/`
 - `.codex-private/`
 - private notes

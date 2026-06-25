@@ -19,4 +19,4 @@ if ! command -v codex >/dev/null 2>&1; then
 fi
 
 cd "$TARGET"
-codex --profile onsite-safe "Use \$repo-deep-dive. If the skill is not discoverable yet, read ${CODEX_HOME:-$HOME/.codex}/skills/repo-deep-dive/SKILL.md and follow it. Inspect this repo deeply, explain the architecture, find flaws, and recommend the best one-day hackathon slice. Stay read-only; do not edit files."
+codex --profile onsite-safe --sandbox read-only "Use \$repo-deep-dive. If the skill is not discoverable yet, read ${CODEX_HOME:-$HOME/.codex}/skills/repo-deep-dive/SKILL.md and follow it. Inspect this repo deeply, explain the architecture, find flaws, and recommend the best one-day hackathon slice. Stay read-only; do not edit files."

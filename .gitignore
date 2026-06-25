@@ -19,6 +19,9 @@ tmp/
 .codex-private/
 .private/
 private-notes/
+scenarios/
+sample_data/
+retrospectives/
 dist/
 build/
 node_modules/
