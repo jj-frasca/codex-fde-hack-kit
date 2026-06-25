@@ -36,6 +36,8 @@ DAY_OF.md
 
 It contains the event-day operating model, discovery capture, one-page spec shape, build loop, review board, demo shape, setup fallbacks, and contamination checks.
 
+If GitHub, install, or skill discovery is blocked, use the shorter `EVENT_DAY_CARD.md` first and `EVENT_DAY_BUNDLE.md` when you need more detail.
+
 ## Install Global Instructions
 
 ```bash
@@ -107,7 +109,7 @@ If you need the kit physically inside the challenge repo, embed it under ignored
 ~/codex-fde-hack-kit/scripts/install-kit-in-target-repo.sh /path/to/challenge-repo
 ```
 
-This keeps the public kit available from the codebase without committing it. If GitHub or install is blocked, use `EVENT_DAY_BUNDLE.md` and paste prompts manually.
+This keeps the public kit available from the codebase without committing it. If GitHub or install is blocked, use `EVENT_DAY_CARD.md` first and `EVENT_DAY_BUNDLE.md` when you need more detail.
 
 See `docs/day_of_access_strategy.md`.
 

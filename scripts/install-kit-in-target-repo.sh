@@ -33,6 +33,7 @@ items=(
   "AGENTS.global.md"
   "DAY_OF.md"
   "EVENT_DAY_BUNDLE.md"
+  "EVENT_DAY_CARD.md"
   "README.md"
   "agent_team_board.md"
   "demo_readme_template.md"

@@ -1,6 +1,6 @@
 # Event Day Bundle
 
-Use this if GitHub, private repos, user-level install, or skill discovery is blocked.
+Use this if GitHub, private repos, user-level install, or skill discovery is blocked. If time is extremely short, use `EVENT_DAY_CARD.md` first.
 
 Keep this file outside the challenge repo unless event rules require a local copy. If copied into the challenge repo, put it under `.codex-kit/` and make sure `.codex-kit/` is in `.git/info/exclude`.
 
@@ -38,10 +38,10 @@ Run kit scripts by path:
 
 ```bash
 cd /path/to/challenge-repo
-codex -c 'sandbox_mode="workspace-write"' -c 'approval_policy="on-request"' -c 'model_reasoning_effort="xhigh"'
+codex -c 'sandbox_mode="read-only"' -c 'approval_policy="on-request"' -c 'model_reasoning_effort="xhigh"'
 ```
 
-Paste the prompts below manually.
+Paste the first prompt below manually. Restart with `sandbox_mode="workspace-write"` only after the slice is chosen.
 
 ### Tier 4: No GitHub
 
@@ -146,8 +146,8 @@ Before committing or demoing:
 ```bash
 git status --short
 git diff --check
-git ls-files .codex-kit .codex-private .private private-notes EVENT_DAY_BUNDLE.md 2>/dev/null
-git diff --cached --name-only | grep -E '(^|/)(\.codex-kit|\.codex-private|\.private|private-notes)(/|$)|(^|/)EVENT_DAY_BUNDLE\.md$' || true
+git ls-files .codex-kit .codex-private .private private-notes EVENT_DAY_BUNDLE.md EVENT_DAY_CARD.md 2>/dev/null
+git diff --cached --name-only | grep -E '(^|/)(\.codex-kit|\.codex-private|\.private|private-notes)(/|$)|(^|/)EVENT_DAY_(BUNDLE|CARD)\.md$' || true
 ```
 
 No kit files, private notes, credentials, or private context should be staged.

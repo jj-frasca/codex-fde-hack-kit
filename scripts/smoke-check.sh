@@ -5,6 +5,7 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 required=(
   "EVENT_DAY_BUNDLE.md"
+  "EVENT_DAY_CARD.md"
   "DAY_OF.md"
   "README.md"
   "hackathon_quickstart.md"
@@ -124,6 +125,11 @@ if [[ ! -f "$TMP_REPO/.codex-kit/codex-fde-hack-kit/EVENT_DAY_BUNDLE.md" ]]; the
   exit 1
 fi
 
+if [[ ! -f "$TMP_REPO/.codex-kit/codex-fde-hack-kit/EVENT_DAY_CARD.md" ]]; then
+  echo "Embedded-kit smoke failed: missing EVENT_DAY_CARD.md" >&2
+  exit 1
+fi
+
 if [[ ! -f "$TMP_REPO/.codex-kit/codex-fde-hack-kit/DAY_OF.md" ]]; then
   echo "Embedded-kit smoke failed: missing DAY_OF.md" >&2
   exit 1
@@ -134,7 +140,7 @@ if ! grep -qxF ".codex-kit/" "$TMP_REPO/.git/info/exclude"; then
   exit 1
 fi
 
-if git -C "$TMP_REPO" ls-files .codex-kit .codex-private .private private-notes EVENT_DAY_BUNDLE.md | grep . >/dev/null; then
+if git -C "$TMP_REPO" ls-files .codex-kit .codex-private .private private-notes EVENT_DAY_BUNDLE.md EVENT_DAY_CARD.md | grep . >/dev/null; then
   echo "Embedded-kit smoke failed: protected files are tracked" >&2
   exit 1
 fi

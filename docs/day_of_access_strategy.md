@@ -7,7 +7,8 @@ Default to the lowest-contamination path that works.
 1. Public HTTPS clone outside the challenge repo.
 2. Public kit embedded under ignored `.codex-kit/` inside the challenge repo.
 3. No-install Codex session with prompts pasted manually.
-4. Printed or preloaded `EVENT_DAY_BUNDLE.md`.
+4. Printed or preloaded `EVENT_DAY_CARD.md`.
+5. Longer `EVENT_DAY_BUNDLE.md` if more detail is needed.
 
 Do not depend on private repo access on event day unless the rules explicitly allow it.
 
@@ -47,13 +48,14 @@ and adds these local-only excludes:
 .private/
 private-notes/
 EVENT_DAY_BUNDLE.md
+EVENT_DAY_CARD.md
 ```
 
 Always check before commit:
 
 ```bash
 git status --short
-git ls-files .codex-kit .codex-private .private private-notes EVENT_DAY_BUNDLE.md
+git ls-files .codex-kit .codex-private .private private-notes EVENT_DAY_BUNDLE.md EVENT_DAY_CARD.md
 ```
 
 The second command should print nothing.
@@ -64,14 +66,16 @@ If `~/.codex`, `~/.agents`, hooks, profiles, or shell scripts are blocked:
 
 ```bash
 cd /path/to/challenge-repo
-codex -c 'sandbox_mode="workspace-write"' -c 'approval_policy="on-request"' -c 'model_reasoning_effort="xhigh"'
+codex -c 'sandbox_mode="read-only"' -c 'approval_policy="on-request"' -c 'model_reasoning_effort="xhigh"'
 ```
 
-Paste prompts from `EVENT_DAY_BUNDLE.md`.
+Paste prompts from `EVENT_DAY_CARD.md` first. Restart with `sandbox_mode="workspace-write"` only after the slice is chosen. Use `EVENT_DAY_BUNDLE.md` when you need more detail.
 
 ## Tier 4: No GitHub
 
-Use a preloaded or printed copy of `EVENT_DAY_BUNDLE.md`. If event rules allow a file transfer, place the bundle outside the challenge repo or under ignored `.codex-kit/`.
+Use a preloaded or printed copy of `EVENT_DAY_CARD.md`. If event rules allow a file transfer, place the card outside the challenge repo or under ignored `.codex-kit/`.
+
+Use `EVENT_DAY_BUNDLE.md` only when you need more detail.
 
 ## What Never Belongs In The Challenge Commit
 
@@ -80,6 +84,8 @@ Use a preloaded or printed copy of `EVENT_DAY_BUNDLE.md`. If event rules allow a
 - `.codex-kit/`
 - `.codex-private/`
 - private notes
+- `EVENT_DAY_BUNDLE.md`
+- `EVENT_DAY_CARD.md`
 - credentials
 - private event logistics
 - private practice scenarios
