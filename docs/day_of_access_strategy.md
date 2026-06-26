@@ -44,6 +44,7 @@ and adds these local-only excludes:
 
 ```text
 .codex-kit/
+.codex-working/
 .codex-private/
 .private/
 private-notes/
@@ -55,7 +56,7 @@ Always check before commit:
 
 ```bash
 git status --short
-git ls-files .codex-kit .codex-private .private private-notes EVENT_DAY_BUNDLE.md EVENT_DAY_CARD.md
+git ls-files .codex-kit .codex-working .codex-private .private private-notes EVENT_DAY_BUNDLE.md EVENT_DAY_CARD.md
 ```
 
 The second command should print nothing.
@@ -82,6 +83,7 @@ Use `EVENT_DAY_BUNDLE.md` only when you need more detail.
 - `codex-fde-hack-kit`
 - private practice repos
 - `.codex-kit/`
+- `.codex-working/`
 - `.codex-private/`
 - private notes
 - `EVENT_DAY_BUNDLE.md`

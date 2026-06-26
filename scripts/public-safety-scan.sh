@@ -16,6 +16,11 @@ fi
 common_args=(
   -n -uu --no-heading
   -g '!**/.git/**' \
+  -g '!**/.codex-kit/**' \
+  -g '!**/.codex-working/**' \
+  -g '!**/.codex-private/**' \
+  -g '!**/.private/**' \
+  -g '!**/private-notes/**' \
   -g '!**/node_modules/**' \
   -g '!**/dist/**' \
   -g '!**/build/**' \

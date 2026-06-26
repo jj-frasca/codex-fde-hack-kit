@@ -71,4 +71,5 @@ echo
 echo "Embedded public kit at: $DEST"
 echo "Run from challenge repo:"
 echo "  .codex-kit/codex-fde-hack-kit/scripts/codex-deep-dive.sh ."
+echo "  .codex-kit/codex-fde-hack-kit/scripts/codex-repo-context.sh ."
 echo "  .codex-kit/codex-fde-hack-kit/scripts/pre-push-check.sh ."

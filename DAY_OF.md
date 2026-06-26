@@ -15,6 +15,7 @@ Do not add private event details, proprietary data, personal notes, or company-s
 ~/codex-fde-hack-kit/scripts/install-event-harness.sh
 cd /path/to/challenge-repo
 ~/codex-fde-hack-kit/scripts/codex-deep-dive.sh .
+~/codex-fde-hack-kit/scripts/codex-repo-context.sh .
 ```
 
 Then choose the smallest useful slice, start Codex with `codex --profile onsite-safe`, and implement only after the first read-only pass is complete.
@@ -36,6 +37,7 @@ Core rules:
 - Use maximum reasoning effort for planning, architecture, review, safety, and demo-critical decisions.
 - Keep one main integrator responsible for code edits.
 - Use specialist boards for read-heavy analysis, architecture decisions, reliability/security review, and demo review.
+- Build and maintain `.codex-working/REPO_CONTEXT.md` so fresh sessions and agents share the same repo map.
 - Prefer one narrow vertical slice over a broad platform.
 - Optimize for usefulness, trust, non-coder clarity, and demo feasibility.
 - Show evidence: source references, reason codes, tests, smoke checks, audit trails, or manual validation.
@@ -142,6 +144,53 @@ Open Questions:
 ```
 
 The spec should be practical, not academic. It should explain why this artifact is the right one for the timebox.
+
+## Repo Context File
+
+After the first read-only pass, create an ignored shared repo map. Timebox this to 5-10 minutes unless the repo is unusually large or confusing:
+
+```bash
+~/codex-fde-hack-kit/scripts/codex-repo-context.sh .
+```
+
+This deterministic helper writes:
+
+```text
+.codex-working/REPO_CONTEXT.md
+.codex-working/repo_inventory.txt
+```
+
+Every fresh Codex session or subagent should read `REPO_CONTEXT.md` before planning or editing. The helper does not run Codex or modify application files.
+
+The file should identify:
+
+- app surfaces, routes, entrypoints, and commands
+- auth, data access, migrations, jobs, and integration patterns
+- UI framework, component conventions, and design system
+- existing domain objects related to the problem
+- safe extension points and files to avoid
+- verification commands and demo path
+- open decisions for the human operator
+
+Do not commit `.codex-working/`.
+
+## Human-Led Planning Gate
+
+Before implementation, the human operator should explicitly choose or approve:
+
+```text
+Target user:
+Decision/action:
+Artifact type:
+Existing app surface or extension point:
+Persistence plan:
+Trust model:
+Human-in-loop boundary:
+Non-goals:
+Demo acceptance:
+```
+
+Codex should challenge tradeoffs, name simpler alternatives, and identify missing information. The human owns the final product and architecture choices.
 
 ## Artifact Selection
 
@@ -262,6 +311,7 @@ Run embedded kit commands:
 
 ```bash
 .codex-kit/codex-fde-hack-kit/scripts/codex-deep-dive.sh .
+.codex-kit/codex-fde-hack-kit/scripts/codex-repo-context.sh .
 .codex-kit/codex-fde-hack-kit/scripts/pre-push-check.sh .
 ```
 
@@ -280,6 +330,7 @@ Use these from the challenge repo:
 
 ```bash
 ~/codex-fde-hack-kit/scripts/codex-deep-dive.sh .
+~/codex-fde-hack-kit/scripts/codex-repo-context.sh .
 ~/codex-fde-hack-kit/scripts/codex-interview-plan.sh "Prepare problem-owner questions"
 ~/codex-fde-hack-kit/scripts/codex-plan.sh "Frame the smallest useful slice"
 ~/codex-fde-hack-kit/scripts/codex-implement.sh "Implement the agreed slice"
@@ -298,7 +349,7 @@ Check that kit/private files are not tracked:
 
 ```bash
 git status --short
-git ls-files .codex-kit .codex-private .private private-notes EVENT_DAY_BUNDLE.md EVENT_DAY_CARD.md
+git ls-files .codex-kit .codex-working .codex-private .private private-notes EVENT_DAY_BUNDLE.md EVENT_DAY_CARD.md
 ```
 
 The second command should print nothing.
@@ -307,7 +358,7 @@ The second command should print nothing.
 
 - Do not clone private practice repos unless rules explicitly allow it.
 - Do not copy private prep into the challenge repo.
-- Do not commit `.codex-kit/`, `.codex-private/`, `.private/`, private notes, local paths, screenshots with private context, credentials, or personal access tokens.
+- Do not commit `.codex-kit/`, `.codex-working/`, `.codex-private/`, `.private/`, private notes, local paths, screenshots with private context, credentials, or personal access tokens.
 - Do not use `hackathon-bootstrap.sh` unless you intentionally want to modify the target repo.
 - Do not let Codex keep coding after the demo path breaks; restore the demo path first.
 - Do not build a broad platform when a narrow decision aid would be more useful.

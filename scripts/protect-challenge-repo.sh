@@ -25,6 +25,7 @@ touch "$EXCLUDE_FILE"
 
 patterns=(
   ".codex-kit/"
+  ".codex-working/"
   ".codex-private/"
   ".private/"
   "private-notes/"
@@ -40,14 +41,14 @@ done
 
 echo "Updated local git exclude: $EXCLUDE_FILE"
 
-tracked="$(git -C "$REPO_ROOT" ls-files .codex-kit .codex-private .private private-notes EVENT_DAY_BUNDLE.md EVENT_DAY_CARD.md 2>/dev/null || true)"
+tracked="$(git -C "$REPO_ROOT" ls-files .codex-kit .codex-working .codex-private .private private-notes EVENT_DAY_BUNDLE.md EVENT_DAY_CARD.md 2>/dev/null || true)"
 if [[ -n "$tracked" ]]; then
   echo "Warning: protected paths are already tracked:" >&2
   printf '%s\n' "$tracked" >&2
   exit 1
 fi
 
-staged="$(git -C "$REPO_ROOT" diff --cached --name-only | grep -E '(^|/)(\.codex-kit|\.codex-private|\.private|private-notes)(/|$)|(^|/)EVENT_DAY_(BUNDLE|CARD)\.md$' || true)"
+staged="$(git -C "$REPO_ROOT" diff --cached --name-only | grep -E '(^|/)(\.codex-kit|\.codex-working|\.codex-private|\.private|private-notes)(/|$)|(^|/)EVENT_DAY_(BUNDLE|CARD)\.md$' || true)"
 if [[ -n "$staged" ]]; then
   echo "Warning: protected paths are staged:" >&2
   printf '%s\n' "$staged" >&2

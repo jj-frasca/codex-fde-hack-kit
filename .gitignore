@@ -17,6 +17,7 @@ credentials.*
 *.log
 tmp/
 .codex-private/
+.codex-working/
 .private/
 private-notes/
 scenarios/

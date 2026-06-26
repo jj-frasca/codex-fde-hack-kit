@@ -7,10 +7,12 @@ The main agent owns integration. Board roles inspect, challenge, and summarize. 
 ## Board Checkpoints
 
 1. Discovery board: clarify user, workflow, pain, trusted inputs, useful output, constraints, failure modes, and non-goals.
-2. Architecture/slice board: choose one smallest useful artifact and defend why alternatives are worse for demo time.
-3. Implementation board: keep one main integrator, one verification lane, one scope guard, and early integration.
-4. Pre-demo board: review client trust, non-coder clarity, guardrails, limitations, and the production path.
-5. Pre-push board: run safety scan, smoke checks, and adversarial review.
+2. Repo context board: create or refresh `.codex-working/REPO_CONTEXT.md` so fresh sessions share architecture, commands, data, and extension-point context.
+3. Human planning gate: ask the operator to choose target user, artifact, app surface, persistence, trust model, human review, non-goals, and demo acceptance.
+4. Architecture/slice board: choose one smallest useful artifact and defend why alternatives are worse for demo time.
+5. Implementation board: keep one main integrator, one verification lane, one scope guard, and early integration.
+6. Pre-demo board: review client trust, non-coder clarity, guardrails, limitations, and the production path.
+7. Pre-push board: run safety scan, smoke checks, and adversarial review.
 
 ## Default Roles
 

@@ -94,6 +94,16 @@ Fast wrapper:
 
 The wrapper enforces a read-only sandbox for the first repository pass.
 
+Then create the shared working repo map:
+
+```bash
+~/codex-fde-hack-kit/scripts/codex-repo-context.sh /path/to/challenge-repo
+```
+
+This writes ignored `.codex-working/REPO_CONTEXT.md` inside the challenge repo so fresh sessions and agents can start from the same architecture, command, data, and extension-point context.
+It is deterministic: it updates local git excludes, runs repo inventory, and does not run Codex or modify app code. Timebox it to 5-10 minutes on event day.
+Treat the first file as a scaffold plus inventory. Ask Codex to refine the TODO sections from repo evidence before relying on it for architecture decisions.
+
 ## Access And Fallbacks
 
 Prefer cloning the public kit outside the challenge repo:
@@ -131,6 +141,7 @@ Run these from the target repo you want Codex to work on:
 
 ```bash
 /path/to/codex-fde-hack-kit/scripts/codex-analyze.sh
+/path/to/codex-fde-hack-kit/scripts/codex-repo-context.sh .
 /path/to/codex-fde-hack-kit/scripts/codex-interview-plan.sh "Prepare questions for the problem owner"
 /path/to/codex-fde-hack-kit/scripts/codex-plan.sh "Build the smallest useful ops tool for this workflow"
 /path/to/codex-fde-hack-kit/scripts/codex-implement.sh
@@ -182,6 +193,7 @@ user discovery -> one-page agent/tool spec -> smallest useful build
 Use:
 
 - `docs/day_schedule.md`
+- `docs/repo_context_workflow.md`
 - `docs/agent_spec_template.md`
 - `prompts/16_agent_spec_document.md`
 - `prompts/18_evaluator_walkup.md`
@@ -190,6 +202,7 @@ Use:
 ## Safety
 
 - Do not commit proprietary company data, code, screenshots, or private challenge materials.
+- Do not commit `.codex-kit/`, `.codex-working/`, private notes, credentials, or local event context.
 - Do not run Codex in a workspace another tool or teammate is actively editing. Use a worktree.
 - Use subagents for bounded read-heavy work and reviews; keep one integrator for implementation.
 - Prefer deterministic rules and auditable workflows before LLM-based automation.

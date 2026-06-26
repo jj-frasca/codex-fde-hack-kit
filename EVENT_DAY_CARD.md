@@ -104,8 +104,8 @@ From the challenge repo, before commit or demo:
 ```bash
 git status --short
 git diff --check
-git ls-files .codex-kit .codex-private .private private-notes EVENT_DAY_BUNDLE.md EVENT_DAY_CARD.md 2>/dev/null
-git diff --cached --name-only | grep -E '(^|/)(\.codex-kit|\.codex-private|\.private|private-notes)(/|$)|(^|/)EVENT_DAY_(BUNDLE|CARD)\.md$' || true
+git ls-files .codex-kit .codex-working .codex-private .private private-notes EVENT_DAY_BUNDLE.md EVENT_DAY_CARD.md 2>/dev/null
+git diff --cached --name-only | grep -E '(^|/)(\.codex-kit|\.codex-working|\.codex-private|\.private|private-notes)(/|$)|(^|/)EVENT_DAY_(BUNDLE|CARD)\.md$' || true
 ```
 
 The final two commands should not show tracked or staged private/kit files.

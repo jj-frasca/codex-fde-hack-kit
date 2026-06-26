@@ -42,6 +42,8 @@ Demo angle:
 - Use specialist boards for non-trivial problem framing, architecture, review, and demo decisions.
 - Keep one main integrator responsible for code edits; use subagents for bounded read-heavy work and review.
 - Add validation through tests, smoke commands, fixtures, or manual checklists.
+- Treat trust as paramount: do not present outputs as true without rigorous verification, source citations, reasoning notes, and an audit trail.
+- Keep humans in the loop for critical, high-impact, irreversible, legal, safety, financial, operational, or external-facing workflows.
 - Avoid broad rewrites and new dependencies unless clearly justified.
 - Summarize commands run and residual risk.
 - Never commit API keys, tokens, private contact details, or proprietary/private company information.

@@ -146,8 +146,8 @@ Before committing or demoing:
 ```bash
 git status --short
 git diff --check
-git ls-files .codex-kit .codex-private .private private-notes EVENT_DAY_BUNDLE.md EVENT_DAY_CARD.md 2>/dev/null
-git diff --cached --name-only | grep -E '(^|/)(\.codex-kit|\.codex-private|\.private|private-notes)(/|$)|(^|/)EVENT_DAY_(BUNDLE|CARD)\.md$' || true
+git ls-files .codex-kit .codex-working .codex-private .private private-notes EVENT_DAY_BUNDLE.md EVENT_DAY_CARD.md 2>/dev/null
+git diff --cached --name-only | grep -E '(^|/)(\.codex-kit|\.codex-working|\.codex-private|\.private|private-notes)(/|$)|(^|/)EVENT_DAY_(BUNDLE|CARD)\.md$' || true
 ```
 
 No kit files, private notes, credentials, or private context should be staged.

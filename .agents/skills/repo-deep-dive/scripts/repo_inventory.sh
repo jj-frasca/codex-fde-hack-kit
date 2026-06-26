@@ -20,9 +20,9 @@ section() {
 }
 
 section "Repo"
-printf 'path: %s\n' "$(pwd)"
+printf 'path: .\n'
 if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-  printf 'git_root: %s\n' "$(git rev-parse --show-toplevel)"
+  printf 'git_root: .\n'
   printf 'branch: %s\n' "$(git branch --show-current 2>/dev/null || true)"
   printf 'head: %s\n' "$(git rev-parse --short HEAD 2>/dev/null || true)"
   section "Git Status"
@@ -34,6 +34,11 @@ fi
 section "Top-Level Files"
 find . -maxdepth 2 \
   -path './.git' -prune -o \
+  -path './.codex-kit' -prune -o \
+  -path './.codex-working' -prune -o \
+  -path './.codex-private' -prune -o \
+  -path './.private' -prune -o \
+  -path './private-notes' -prune -o \
   -path './node_modules' -prune -o \
   -path './.venv' -prune -o \
   -path './.pytest_cache' -prune -o \
@@ -44,7 +49,7 @@ find . -maxdepth 2 \
 
 section "Instruction And Docs"
 rg --files -g 'AGENTS.md' -g 'AGENTS.override.md' -g 'CLAUDE.md' -g 'README*' -g 'docs/**' -g '*.md' \
-  -g '!**/.git/**' -g '!**/node_modules/**' -g '!**/.venv/**' -g '!**/.pytest_cache/**' -g '!**/.ruff_cache/**' \
+  -g '!**/.git/**' -g '!**/.codex-kit/**' -g '!**/.codex-working/**' -g '!**/.codex-private/**' -g '!**/.private/**' -g '!**/private-notes/**' -g '!**/node_modules/**' -g '!**/.venv/**' -g '!**/.pytest_cache/**' -g '!**/.ruff_cache/**' \
   | sort | sed -n '1,180p' || true
 
 section "Manifests And Config"
@@ -54,7 +59,7 @@ rg --files \
   -g 'Cargo.toml' -g 'go.mod' -g 'Gemfile' -g 'composer.json' \
   -g 'Dockerfile' -g 'docker-compose*.yml' -g 'Makefile' -g 'justfile' \
   -g '.github/workflows/**' -g '.gitlab-ci.yml' -g 'tox.ini' -g 'pytest.ini' \
-  -g '!**/.git/**' -g '!**/node_modules/**' -g '!**/.venv/**' -g '!**/.pytest_cache/**' -g '!**/.ruff_cache/**' \
+  -g '!**/.git/**' -g '!**/.codex-kit/**' -g '!**/.codex-working/**' -g '!**/.codex-private/**' -g '!**/.private/**' -g '!**/private-notes/**' -g '!**/node_modules/**' -g '!**/.venv/**' -g '!**/.pytest_cache/**' -g '!**/.ruff_cache/**' \
   | sort | sed -n '1,220p' || true
 
 section "Likely Entrypoints"
@@ -66,13 +71,13 @@ rg -n \
   -e 'click\.command|typer\.Typer|argparse\.ArgumentParser' \
   -e 'func main\(' \
   -e 'public static void main' \
-  -g '!**/.git/**' -g '!**/node_modules/**' -g '!**/.venv/**' -g '!**/.pytest_cache/**' -g '!**/.ruff_cache/**' -g '!**/dist/**' -g '!**/build/**' \
+  -g '!**/.git/**' -g '!**/.codex-kit/**' -g '!**/.codex-working/**' -g '!**/.codex-private/**' -g '!**/.private/**' -g '!**/private-notes/**' -g '!**/node_modules/**' -g '!**/.venv/**' -g '!**/.pytest_cache/**' -g '!**/.ruff_cache/**' -g '!**/dist/**' -g '!**/build/**' \
   . | sed -n '1,220p' || true
 
 section "Tests"
 rg --files \
   -g 'test_*' -g '*_test.*' -g '*.test.*' -g '*.spec.*' -g 'tests/**' -g '__tests__/**' \
-  -g '!**/.git/**' -g '!**/node_modules/**' -g '!**/.venv/**' -g '!**/.pytest_cache/**' -g '!**/.ruff_cache/**' -g '!**/__pycache__/**' -g '!**/*.pyc' \
+  -g '!**/.git/**' -g '!**/.codex-kit/**' -g '!**/.codex-working/**' -g '!**/.codex-private/**' -g '!**/.private/**' -g '!**/private-notes/**' -g '!**/node_modules/**' -g '!**/.venv/**' -g '!**/.pytest_cache/**' -g '!**/.ruff_cache/**' -g '!**/__pycache__/**' -g '!**/*.pyc' \
   | sort | sed -n '1,220p' || true
 
 section "Routes And APIs"
@@ -82,20 +87,20 @@ rg -n \
   -e 'router\.(get|post|put|patch|delete)' \
   -e 'app\.(get|post|put|patch|delete)\(' \
   -e 'fetch\(|axios\.|requests\.' \
-  -g '!**/.git/**' -g '!**/node_modules/**' -g '!**/.venv/**' -g '!**/.pytest_cache/**' -g '!**/.ruff_cache/**' -g '!**/dist/**' -g '!**/build/**' \
+  -g '!**/.git/**' -g '!**/.codex-kit/**' -g '!**/.codex-working/**' -g '!**/.codex-private/**' -g '!**/.private/**' -g '!**/private-notes/**' -g '!**/node_modules/**' -g '!**/.venv/**' -g '!**/.pytest_cache/**' -g '!**/.ruff_cache/**' -g '!**/dist/**' -g '!**/build/**' \
   . | sed -n '1,220p' || true
 
 section "Data And Env"
 rg --files \
   -g 'data/**' -g 'fixtures/**' -g 'sample*' -g 'examples/**' \
   -g '.env.example' -g '.env.sample' -g '*.env.example' -g '*.env.sample' \
-  -g '!**/.git/**' -g '!**/node_modules/**' -g '!**/.venv/**' -g '!**/.pytest_cache/**' -g '!**/.ruff_cache/**' \
+  -g '!**/.git/**' -g '!**/.codex-kit/**' -g '!**/.codex-working/**' -g '!**/.codex-private/**' -g '!**/.private/**' -g '!**/private-notes/**' -g '!**/node_modules/**' -g '!**/.venv/**' -g '!**/.pytest_cache/**' -g '!**/.ruff_cache/**' \
   | sort | sed -n '1,220p' || true
 
 section "TODOs And Risk Markers"
 rg -n \
   -e 'TODO|FIXME|HACK|XXX|not implemented|stub|mock|temporary|hardcoded|unsafe|insecure|debug' \
-  -g '!**/.git/**' -g '!**/node_modules/**' -g '!**/.venv/**' -g '!**/.pytest_cache/**' -g '!**/.ruff_cache/**' -g '!**/dist/**' -g '!**/build/**' \
+  -g '!**/.git/**' -g '!**/.codex-kit/**' -g '!**/.codex-working/**' -g '!**/.codex-private/**' -g '!**/.private/**' -g '!**/private-notes/**' -g '!**/node_modules/**' -g '!**/.venv/**' -g '!**/.pytest_cache/**' -g '!**/.ruff_cache/**' -g '!**/dist/**' -g '!**/build/**' \
   . | sed -n '1,220p' || true
 
 section "Suspicious Secret-Like Patterns"
@@ -105,7 +110,7 @@ scan_secret_pattern() {
   local matches
   matches="$(rg -n --no-heading \
     -e "$pattern" \
-    -g '!**/.git/**' -g '!**/node_modules/**' -g '!**/.venv/**' -g '!**/.pytest_cache/**' -g '!**/.ruff_cache/**' -g '!**/dist/**' -g '!**/build/**' \
+    -g '!**/.git/**' -g '!**/.codex-kit/**' -g '!**/.codex-working/**' -g '!**/.codex-private/**' -g '!**/.private/**' -g '!**/private-notes/**' -g '!**/node_modules/**' -g '!**/.venv/**' -g '!**/.pytest_cache/**' -g '!**/.ruff_cache/**' -g '!**/dist/**' -g '!**/build/**' \
     . || true)"
   if [[ -n "$matches" ]]; then
     printf '%s\n' "$matches" | awk -F: -v label="$label" '{print $1 ":" $2 ": potential " label}'
